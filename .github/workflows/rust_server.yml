@@ -13,30 +13,24 @@ jobs:
         os: [ubuntu-latest, macOS-latest]
 
     steps:
-    - uses: actions/checkout@v2
-    - uses: Swatinem/rust-cache@v2
+      - uses: actions/checkout@v2
+      - uses: Swatinem/rust-cache@v2
 
-    - name: Update local toolchain
-      run: |
-        rustup update
-        rustup component add clippy
-        rustup install nightly
+      - name: Toolchain info
+        run: |
+          cargo --version --verbose
+          rustc --version
+          cargo clippy --version
 
-    - name: Toolchain info
-      run: |
-        cargo --version --verbose
-        rustc --version
-        cargo clippy --version
+      - name: Lint
+        run: |
+          cargo fmt -- --check
 
-    - name: Lint
-      run: |
-        cargo fmt -- --check
+      - name: Test
+        run: |
+          cargo check
+          cargo test --all
 
-    - name: Test
-      run: |
-        cargo check
-        cargo test --all
-
-    - name: Build
-      run: |
-        cargo build --release
+      - name: Build
+        run: |
+          cargo build --release
