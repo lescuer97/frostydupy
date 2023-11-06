@@ -1,4 +1,4 @@
-slint::slint!{
+slint::slint! {
     export component HelloWorld {
         Text {
             text: "hello world";
