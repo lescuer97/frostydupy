@@ -1,6 +1,0 @@
-[workspace]
-
-members = [
-    "gui", "wallet"
-]
-resolver = "2"
